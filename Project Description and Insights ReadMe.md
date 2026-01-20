@@ -1,4 +1,4 @@
-# Brazilian E-commerce Olist Store 
+# Brazilian E-commerce Olist Store (Documentation in Progress) 
 
 This project analyzes order lifecycle and delivery performance in the Brazilian Olist e-commerce platform, with a focus on customer location, order timelines, and delivery efficiency across states and cities.
 The dataset integrates customer information, order status timestamps, delivery milestones, and geolocation data, enabling an in-depth examination of how geography and time influence order fulfillment.
