@@ -30,9 +30,14 @@ The dataset provided insight into the processes the stores takes from when the c
 
 <img width="2150" height="1590" alt="Brazillian E-commerce Sales" src="https://github.com/user-attachments/assets/37ed4ed3-79ff-41b3-ae9a-a71a5ad551bf" />
 
+The analysis is structured into sections based on analytical focus. The first step merged the Customers and Orders datasets to improve scalability and simplify downstream analysis.
 
-The data analysis was broke diown into sections, based on the necessary focus. The first dataset merged was the Customers data and the Orders data to enable scalability and simplicity of analysis.
-The merged data were a total of 99441 distinct data rows and 23 columns, following the formatting of the date section, year, month and the difference between the time of order approval and delivery to the receiver. 
+Rows: 99,441 distinct records
+
+Columns: 23
+
+Derived fields: Year, month, and delivery duration (difference between approval and customer delivery)
+
 
 Aggregate Analysis for the Years contained in the data.
 ```SQL
@@ -45,40 +50,42 @@ group by
       order_delivered_customer_year
 ```
 Result: 
-|  Year   |   Total    	|  Average     |
+|  Year   |   Total     |  Average     |
 |---------|-------------|--------------|
 |   2017  |  498894     | 	12.2       |
 |   2018  |  701444     |   12.7       |
-|   2016	|  5355   	  |   19.7       |
+|   2016  |  5355       |   19.7       |
 
-
+Preliminary Observation: Delivery times stabilized around ~12–13 days in 2017–2018, while 2016 shows higher average delivery duration, likely due to a smaller sample size.
 
 
 
 
 The status of the purchases was labelled Delivered, Cancelled, Created, and the counts through the years 2017 and 2016 were overall as 
-|  No  | Order_Status	|  Count       |
+|  No  | Order_Status |  Count       |
 |------|--------------|--------------|
-|   1  | 	Delivered   | 	22418      |
-|   2  |  Canceled	  |   2174       |
-|   3	 |  Created	    |   39         |
+|   1  | Delivered    |   22418      |
+|   2  |  Canceled	 |   2174       |
+|   3	|  Created	 |   39         |
 
+Preliminary Observation: The majority of orders are successfully delivered, indicating generally reliable fulfillment performance.
 
 
 TOP 5 States by Purchasing Frequency
-| No   | Total	|customer_state|
+| No   | Total  |customer_state|
 |------|--------|--------------|
-|   1  | 	6317  | 	RJ         |
-|   2  |  5282	|   SP         |
-|   3	 |  4096	|   MG         |
-|   4	 |  1620  |	  RS         |
-|   5  |  1344  |   BA         |
+|   1  |  6317  | 	RJ        |
+|   2  |  5282  |    SP        |
+|   3	|  4096  |    MG        |
+|   4	|  1620  |	RS        |
+|   5  |  1344  |    BA        |
+
 
 LEAST 5 States by Purchasing Frequency
-| No  | Total	|customer_state|
+| No   | Total  |customer_state|
 |------|--------|--------------|
-|  1   |  54    |	   AM        |
-|  2	 |  34	  |    TO        |
-|  3   | 	33	  |    AC        |
+|  1   |  54    |	AM        |
+|  2	|  34	  |    TO        |
+|  3   |  33	  |    AC        |
 |  4   |  22	  |    AP        |
-|  5   | 	9	    |    RR        |
+|  5   |  9	  |    RR        |
