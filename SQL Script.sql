@@ -1,3 +1,5 @@
+-- !preview conn=DBI::dbConnect(RSQLite::SQLite())
+
 -- Create the table for the data set
 
 CREATE TABLE `rugged-sunbeam-415914.Brazillian_Ecommerce_Olist_Stores.data_set` AS
@@ -306,7 +308,6 @@ SELECT
 FROM `rugged-sunbeam-415914.Brazillian_Ecommerce_Olist_Stores.Customers_Orders` C
 
 LEFT JOIN `rugged-sunbeam-415914.Brazillian_Ecommerce_Olist_Stores.Olist_Geolocation` G ON C.customer_zip_code_prefix = G.geolocation_zip_code_prefix
-
 
 
 
