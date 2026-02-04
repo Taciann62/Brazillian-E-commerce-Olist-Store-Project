@@ -1,3 +1,5 @@
+-- Create the table for the data set
+
 CREATE TABLE `rugged-sunbeam-415914.Brazillian_Ecommerce_Olist_Stores.data_set` AS
 SELECT
   order_id AS order_id,
@@ -28,7 +30,8 @@ SELECT *,
  FROM `rugged-sunbeam-415914.Brazillian_Ecommerce_Olist_Stores.Orders`
 
 
-To join the datasets:
+-- To join the datasets containing customer data and orders together
+
 SELECT  C.customer_id,
         C.customer_city,
         C.customer_state,
@@ -42,17 +45,12 @@ SELECT  C.customer_id,
         O.order_estimated_delivery_date,
         O.order_purchase_timestamp
        
-
-
  FROM `rugged-sunbeam-415914.Brazillian_Ecommerce_Olist_Stores.Customers_Dataset` C
-
-
-
 
 LEFT JOIN `rugged-sunbeam-415914.Brazillian_Ecommerce_Olist_Stores.Order_data` O ON C.customer_id = O.customer_id
 
 
-
+-- Subtract the time between order placement and delivery to figure out wait time or duration.
 
 SELECT *,
         TIMESTAMP_DIFF(order_delivered_customer_date, order_purchase_timestamp, DAY) AS Day_till_delivery,
@@ -65,7 +63,7 @@ WHERE order_purchase_timestamp IS NOT NULL AND
       order_delivered_customer_date IS NOT NULL
 
 
-
+-- Subquery/ Temporary table to further query the data for easy identification of Days of week, Month, and Year.
 
 with Customers_Orders AS
 (SELECT customer_id,
@@ -173,7 +171,7 @@ FROM Customers_Orders
 ORDER BY Customers_Orders.Day_till_delivery DESC
 
 
-## Insights into the sales by customer state, year, deriving SUM, AVG, SDV and FREQUENCY
+-- Insights into the sales by customer state, year, deriving SUM, AVG, SDV, and FREQUENCY
                        
 SELECT order_delivered_customer_year,
        customer_state,
@@ -192,8 +190,7 @@ ORDER BY Frequency DESC
 
 
 
-
-## Insights into the sales by customer statederiving SUM, AVG, SDV and FREQUENCY
+-- Insights into the sales by customer state to derive SUM, AVG, SDV, and FREQUENCY
 
 SELECT customer_state,
        COUNT(customer_state) AS Frequency,
@@ -215,7 +212,7 @@ FROM `rugged-sunbeam-415914.Brazillian_Ecommerce_Olist_Stores.Customers_Orders`
 GROUP BY customer_state
 
 
-## ORDER APPROVAL AND PURCHASE
+-- DURATION BETWEEN ORDER APPROVAL AND PURCHASE
 SELECT customer_state,
        order_approved_year,
        order_approved_month,
@@ -231,7 +228,7 @@ GROUP BY customer_state,
          order_approved_month
 
 
-## ORDER STATUS
+-- ORDER STATUS
 SELECT customer_state,
        order_status,
        order_approved_year,
@@ -249,7 +246,7 @@ GROUP BY customer_state,
          order_status
 
 
-## BIND ORDER ITEMS AND PURCHASE CATEGORY
+-- BIND ORDER ITEMS AND PURCHASE CATEGORY
 SELECT  P.product_id,
         P.product_category_name,
         P.product_description_lenght,
@@ -274,6 +271,8 @@ LEFT JOIN `rugged-sunbeam-415914.Brazillian_Ecommerce_Olist_Stores.Order_items` 
 
 WHERE product_category_name IS NOT NULL
 
+
+-- BIND CUSTOMER DATA AND GEOLOCAION
 
 SELECT  
         C.customer_id,
@@ -307,6 +306,7 @@ SELECT
 FROM `rugged-sunbeam-415914.Brazillian_Ecommerce_Olist_Stores.Customers_Orders` C
 
 LEFT JOIN `rugged-sunbeam-415914.Brazillian_Ecommerce_Olist_Stores.Olist_Geolocation` G ON C.customer_zip_code_prefix = G.geolocation_zip_code_prefix
+
 
 
 
